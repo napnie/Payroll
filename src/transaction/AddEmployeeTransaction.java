@@ -1,15 +1,30 @@
 package transaction;
+import model.Employee;
+import db.PayrollDatabase;
+import transaction.Classification;
+import transaction.Schedule;
+
 
 public class AddEmployeeTransaction implements Transaction {
 
-	private String empid;
+	private int empId;
 	private String itsAddress;
 	private String itsName;
 	
-	@Override
+	public AddEmployeeTransaction() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public  AddEmployeeTransaction(int empId, String name, String adress) {
+		this.empId = empId;
+		this.itsName = name;
+		this.itsAddress = adress;	
+	}
+	
 	public void execute() {
-		// TODO Auto-generated method stub
-
+//		Classification classification = GetClassification();
+//		Schedule schedule = GetSchedule();
+		//payment method
 	}
 
 }
