@@ -24,7 +24,7 @@ public class AddEmployeeTransaction implements Transaction {
 	public void execute() {
 //		Classification classification = GetClassification();
 //		Schedule schedule = GetSchedule();
-		//payment method
+		
 	}
 
 }
