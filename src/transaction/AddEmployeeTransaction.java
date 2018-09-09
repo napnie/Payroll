@@ -22,9 +22,19 @@ public class AddEmployeeTransaction implements Transaction {
 	}
 	
 	public void execute() {
-//		Classification classification = GetClassification();
-//		Schedule schedule = GetSchedule();
+		PaymentClassification classification = GetClassification();
+		PaymentSchedule schedule = GetSchedule();
 		//payment method
+	}
+
+	private PaymentClassification GetClassification() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private PaymentSchedule GetSchedule() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
