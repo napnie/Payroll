@@ -1,24 +1,29 @@
 package db;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import model.Employee;
 
 public class PayrollDatabase {
 	
-	private Employee[] itsEmployees;
+	private static ArrayList<Employee> employee =  new ArrayList<Employee>();
 	
 	public PayrollDatabase() { 
 	
 	}
 	
-	public Employee GetEmployee(int empId) {
-		return itsEmployees[empId];
+	public static Employee getEmployee(int empId) {
+		for (Employee num : employee) {
+			if(num.getId() == empId) return num;
+		}
+		return null;
 	}
 	
-	public void addEmployee(int empId, Employee e) {
-		itsEmployees[empId] = e;
+	public void addEmployee(int empId, Employee e){
+		employee.set(empId, e);
 	}
 	
 	public void clear() {
-		itsEmployees.clear();
-	}		
-	
+		employee = null;
+	}
 }
