@@ -9,7 +9,7 @@ public class PayrollDatabase {
 	
 	}
 	
-	public Employee GetEmployee(int empId) {
+	public Employee getEmployee(int empId) {
 		return itsEmployees[empId];
 	}
 	
