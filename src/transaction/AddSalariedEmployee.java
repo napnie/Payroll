@@ -1,4 +1,4 @@
-package payroll;
+package transaction;
 
 public class AddSalariedEmployee extends AddEmployeeTransaction {
 	

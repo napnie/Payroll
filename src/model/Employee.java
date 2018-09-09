@@ -1,4 +1,7 @@
-package payroll;
+package model;
+
+import transaction.Schedule;
+import transaction.Classification;
 
 public class Employee {
 
