@@ -31,9 +31,7 @@ public class TestAddSalariedEmployee {
 		t = new AddSalariedEmployee(empId, "Bob", "Random place", 1000.00);
 		t.execute();
 		
-		PayrollDatabase database = new PayrollDatabase();
-		
-		Employee e = database.getEmployee(empId);
+		Employee e = PayrollDatabase.getEmployee(empId);
 		assertEquals("Bob", e.getName(), "");
 		
 		PaymentClassification c = e.getClassification();
