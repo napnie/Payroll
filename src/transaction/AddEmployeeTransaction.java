@@ -1,8 +1,8 @@
 package transaction;
 import model.Employee;
 import db.PayrollDatabase;
-import transaction.Classification;
-import transaction.Schedule;
+import transaction.PaymentClassification;
+import transaction.PaymentSchedule;
 
 
 public class AddEmployeeTransaction implements Transaction {
@@ -23,8 +23,7 @@ public class AddEmployeeTransaction implements Transaction {
 	
 	public void execute() {
 //		Classification classification = GetClassification();
-//		Schedule schedule = GetSchedule();
-		
+//		Schedule schedule = GetSchedule();		
 	}
 
 }
