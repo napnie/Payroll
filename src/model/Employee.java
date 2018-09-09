@@ -2,6 +2,7 @@ package model;
 
 import transaction.PaymentSchedule;
 import transaction.PaymentClassification;
+import transaction.PaymentMethod;
 
 public class Employee {
 
