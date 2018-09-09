@@ -1,30 +1,31 @@
 package transaction;
-import model.Employee;
+
 import db.PayrollDatabase;
-import transaction.PaymentClassification;
-import transaction.PaymentSchedule;
+import model.Employee;
 
+public abstract class AddEmployeeTransaction implements Transaction {
 
-public class AddEmployeeTransaction implements Transaction {
-
-	private int empId;
-	private String itsAddress;
-	private String itsName;
+	protected int empId;
+	protected String itsName;
+	protected String itsAddress;
 	
-	public AddEmployeeTransaction() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	public  AddEmployeeTransaction(int empId, String name, String adress) {
+	public AddEmployeeTransaction(int empId, String name, String adress) {
 		this.empId = empId;
 		this.itsName = name;
 		this.itsAddress = adress;	
 	}
 	
 	public void execute() {
-//		Classification classification = GetClassification();
-//		Schedule schedule = GetSchedule();
-		//payment method
+		Employee e = new Employee(empId, itsName, itsAddress);
+		
+		e.setClassification( getClassification() );
+		e.setSchedule( getSchedule() );
+		e.setMethod( new HoldMethod());
+		PayrollDatabase.addEmployee(e);
 	}
+	
+    protected abstract PaymentClassification getClassification() ;
+
+    protected abstract PaymentSchedule getSchedule() ;
 
 }

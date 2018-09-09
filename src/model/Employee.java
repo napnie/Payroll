@@ -5,9 +5,20 @@ import transaction.PaymentClassification;
 import transaction.PaymentMethod;
 
 public class Employee {
+	
+	private int id;
+	private String name;
+	private String address;
 
 	private PaymentSchedule schedule;
 	private PaymentClassification classification;
+	private PaymentMethod method;
+	
+	public Employee(int id, String name, String address) {
+		this.id = id;
+		this.name = name;
+		this.address = address;
+	}
 	
 	public void setSchedule(PaymentSchedule schedule) {
 		this.schedule = schedule;
@@ -28,17 +39,19 @@ public class Employee {
 	}
 
 	public PaymentSchedule getSchedule() {
-		// TODO Auto-generated method stub
-		return null;
+		return schedule;
 	}
 
 	public PaymentClassification getClassification() {
-		// TODO Auto-generated method stub
-		return null;
+		return classification;
 	}
 
 	public PaymentMethod getMethod() {
+		return method;
+	}
+
+	public void setMethod(PaymentMethod pm) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 }

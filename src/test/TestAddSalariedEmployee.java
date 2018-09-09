@@ -28,7 +28,7 @@ public class TestAddSalariedEmployee {
 	
 	@Test
 	public void testCase1() {
-		t = new AddSalariedEmployee(empId, "Bob", 1000.00);
+		t = new AddSalariedEmployee(empId, "Bob", "Random place", 1000.00);
 		t.execute();
 		
 		PayrollDatabase database = new PayrollDatabase();
