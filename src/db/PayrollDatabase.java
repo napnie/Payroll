@@ -17,7 +17,7 @@ public class PayrollDatabase {
 			if(num.getId() == empId) return num;
 		}
 		return null;
-	}
+
 	
 	public void addEmployee(int empId, Employee e){
 		employee.set(empId, e);
