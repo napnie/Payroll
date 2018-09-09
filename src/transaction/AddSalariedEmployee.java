@@ -16,7 +16,7 @@ public class AddSalariedEmployee extends AddEmployeeTransaction {
 
     @Override
     protected PaymentSchedule getSchedule() {
-        return new SalariedSchedule();
+        return new MonthlySchedule();
     }
 	
 }
