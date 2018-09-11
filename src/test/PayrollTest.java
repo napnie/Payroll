@@ -6,6 +6,15 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import db.PayrollDatabase;
+import impl.HoldMethod;
+import impl.HourlyClassification;
+import impl.MonthlySchedule;
+import impl.PaymentClassification;
+import impl.PaymentMethod;
+import impl.PaymentSchedule;
+import impl.SalariedClassification;
+import impl.UnionAffiliation;
+import impl.WeeklySchedule;
 import model.Employee;
 import transaction.AddCommissionedEmployee;
 import transaction.AddHourlyEmployee;
@@ -13,19 +22,10 @@ import transaction.AddSalariedEmployee;
 import transaction.ChangeHourlyTransaction;
 import transaction.ChangeNameTransaction;
 import transaction.DeleteEmployeeTransaction;
-import transaction.PaymentClassification;
-import transaction.HoldMethod;
-import transaction.MonthlySchedule;
-import transaction.PaymentMethod;
-import transaction.SalariedClassification;
 import transaction.ServiceCharge;
 import transaction.ServiceChargeTransaction;
 import transaction.TimeCard;
-import transaction.PaymentSchedule;
 import transaction.TimeCardTransaction;
-import transaction.UnionAffiliation;
-import transaction.WeeklySchedule;
-import transaction.HourlyClassification;
 
 public class PayrollTest {
 	

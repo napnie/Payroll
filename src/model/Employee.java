@@ -1,8 +1,8 @@
 package model;
 
-import transaction.PaymentSchedule;
-import transaction.PaymentClassification;
-import transaction.PaymentMethod;
+import impl.PaymentClassification;
+import impl.PaymentMethod;
+import impl.PaymentSchedule;
 
 public class Employee {
 

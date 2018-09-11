@@ -1,8 +1,8 @@
 package transaction;
 import model.Employee;
 import db.PayrollDatabase;
-import transaction.PaymentClassification;
-import transaction.PaymentSchedule;
+import impl.PaymentClassification;
+import impl.PaymentSchedule;
 
 
 public class AddEmployeeTransaction implements Transaction {

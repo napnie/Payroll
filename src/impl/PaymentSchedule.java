@@ -1,4 +1,4 @@
-package transaction;
+package impl;
 
 public interface PaymentSchedule {
 
