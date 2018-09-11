@@ -10,17 +10,26 @@ import model.Employee;
 import transaction.AddCommissionedEmployee;
 import transaction.AddHourlyEmployee;
 import transaction.AddSalariedEmployee;
+import transaction.ChangeHourlyTransaction;
+import transaction.ChangeNameTransaction;
 import transaction.DeleteEmployeeTransaction;
 import transaction.PaymentClassification;
 import transaction.HoldMethod;
 import transaction.MonthlySchedule;
 import transaction.PaymentMethod;
 import transaction.SalariedClassification;
+import transaction.ServiceCharge;
+import transaction.ServiceChargeTransaction;
+import transaction.TimeCard;
 import transaction.PaymentSchedule;
 import transaction.TimeCardTransaction;
+import transaction.UnionAffiliation;
+import transaction.WeeklySchedule;
 import transaction.HourlyClassification;
 
 public class PayrollTest {
+	
+	Employee e;
 	
 	@Test
 	public void testAddSalariedEmployee() {
@@ -30,7 +39,7 @@ public class PayrollTest {
 		t = new AddSalariedEmployee(empId, "Bob", 1000.00);
 		t.execute();
 		
-		Employee e = PayrollDatabase.getEmployee(empId);
+		getEmp(empId);
 		assertEquals("Bob", e.getName(), "");
 		
 		PaymentClassification c = e.getClassification();
@@ -43,6 +52,10 @@ public class PayrollTest {
 		PaymentMethod pm = e.getMethod();
 		assertTrue(pm instanceof HoldMethod);
 	}
+
+	private void getEmp(int empId) {
+		e = PayrollDatabase.getEmployee(empId);
+	}
 	
 	@Test
 	public void testDeleteEmployee() {
@@ -50,13 +63,13 @@ public class PayrollTest {
 		AddCommissionedEmployee t = new AddCommissionedEmployee(empId, "Lance", "Home", 2500, 3.2);
 		t.execute();
 		{
-			Employee e = PayrollDatabase.getEmployee(empId);
+			getEmp(empId);
 			assertNotNull(e);
 		}
 		DeleteEmployeeTransaction dt = new DeleteEmployeeTransaction(empId);
 		dt.execute();
 		{
-			Employee e = PayrollDatabase.getEmployee(empId);
+			getEmp(empId);
 			assertNull(e);
 		}
 	}
@@ -66,9 +79,9 @@ public class PayrollTest {
 		int empId = 2;
 		AddHourlyEmployee t = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
 		t.execute();
-		TimeCardTransaction tct = new TimeCardTransacton(20011031, 8.0, empId);
-		tct.excute();
-		Employee e = PayrollDatabase.getEmployee(empId);
+		TimeCardTransaction tct = new TimeCardTransaction(20011031, 8.0, empId);
+		tct.execute();
+		getEmp(empId);
 		assertNotNull(e);
 		
 		PaymentClassification pc = e.getClassification();
@@ -85,7 +98,7 @@ public class PayrollTest {
 		int empId = 2;
 		AddHourlyEmployee t = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
 		t.execute();
-		Employee e = PayrollDatabase.getEmployee(empId);
+		getEmp(empId);
 		assertNotNull(e);
 		
 		UnionAffiliation af = new UnionAffiliation(12.5);
@@ -94,10 +107,45 @@ public class PayrollTest {
 		int memberId = 86;
 		PayrollDatabase.addUnionMember(memberId, e);
 		ServiceChargeTransaction sct = new ServiceChargeTransaction(memberId, 20011101, 12.95);
-		sct.excute();
+		sct.execute();
 		ServiceCharge sc = af.getServiceCharge(20011101);
 		assertNotNull(sc);
 		assertEquals(12.95, sc.getAmount(), .001);
+	}
+	
+	@Test
+	public void testChangeNameTransaction() {
+		int empId = 2;
+		AddHourlyEmployee t = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
+		t.execute();
+		
+		ChangeNameTransaction cnt = new ChangeNameTransaction(empId, "Bob");
+		cnt.execute();
+		
+		Employee e = PayrollDatabase.getEmployee(empId);
+		assertNotNull(e);
+		assertEquals("Bob", e.getName());
+	}
+	
+	@Test
+	public void testChangeHourlyTransaction() {
+		int empId = 3;
+		AddCommissionedEmployee t = new AddCommissionedEmployee(empId, "Lance", "Home", 2500, 3.2);
+		t.execute();
+		
+		ChangeHourlyTransaction cht = new ChangeHourlyTransaction(empId, 27.52);
+		cht.execute();
+		getEmp(empId);
+		assertNotNull(e);
+		PaymentClassification pc = e.getClassification();
+		assertNotNull(pc);
+		equals(pc instanceof HourlyClassification);
+		
+		HourlyClassification hc = (HourlyClassification) pc;
+		assertEquals(27.52, hc.getRate(), .001);
+		
+		PaymentSchedule ps = e.getSchedule();
+		equals(ps instanceof WeeklySchedule);
 	}
 
 }
