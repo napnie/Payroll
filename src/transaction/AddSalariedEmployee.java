@@ -2,9 +2,21 @@ package transaction;
 
 public class AddSalariedEmployee extends AddEmployeeTransaction {
 	
-	public AddSalariedEmployee(int empId, String string, double d) {
-		// TODO Auto-generated constructor stub
-	}
-
 	private double salary;
+	
+	public AddSalariedEmployee(int empId, String name, String adress, double saraly) {
+		super(empId, name, adress);
+		this.salary = salary;
+	}
+	
+	@Override
+    protected PaymentClassification getClassification() {
+        return new SalariedClassification();
+    }
+
+    @Override
+    protected PaymentSchedule getSchedule() {
+        return new MonthlySchedule();
+    }
+	
 }
