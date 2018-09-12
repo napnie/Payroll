@@ -73,4 +73,9 @@ public class Employee {
 	public PaymentMethod getMethod() {
 		return this.method;
 	}
+
+
+	public double getSalary() {
+		return 0 ;
+	}
 }
