@@ -1,10 +1,27 @@
 package transaction;
 
+import java.math.BigDecimal;
+
+
 public class AddSalariedEmployee extends AddEmployeeTransaction {
 	
-	public AddSalariedEmployee(int empId, String string, double d) {
-		// TODO Auto-generated constructor stub
+	private final BigDecimal salary;
+
+	
+	public AddSalariedEmployee(int empId, String name, String address, BigDecimal salary) {
+		super(empId, name, address);
+		this.salary = salary;
 	}
 
-	private double salary;
+
+	@Override
+	protected PaymentClassification getClassification() {
+		return new SalariedClassification(salary);
+
+	}
+
+	@Override
+	protected PaymentSchedule getSchedule() {
+		return new MonthlySchedule();
+	}
 }

@@ -1,30 +1,17 @@
 package db;
-import java.util.ArrayList;
-import java.util.Arrays;
-
+import java.util.List;
 import model.Employee;
 
-public class PayrollDatabase {
-	
-	private static ArrayList<Employee> employee =  new ArrayList<Employee>();
-	
-	public PayrollDatabase() { 
-	
+public interface PayrollDatabase {
+		
+	public static class GlobalInstance {
+		public static PayrollDatabase GpayrollDatabase;
 	}
 	
-	public static Employee getEmployee(int empId) {
-		for (Employee num : employee) {
-			if(num.getId() == empId) return num;
-		}
-		return null;
-	}
+	public Employee getEmployee(int empid);
+	public void addEmployee(int empid, Employee employee);
+	public void deleteEmployee(int empid);
+	List<Integer> getAllEmployeeIds();
+	void clear();
 
-	
-	public void addEmployee(int empId, Employee e){
-		employee.set(empId, e);
-	}
-	
-	public void clear() {
-		employee = null;
-	}
 }

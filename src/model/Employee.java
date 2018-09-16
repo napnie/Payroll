@@ -1,6 +1,7 @@
 package model;
 
 import transaction.*;
+import transaction.PaymentClassification;
 
 
 
