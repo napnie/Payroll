@@ -1,11 +1,14 @@
 package transaction;
 import model.Employee;
+
+
 import db.PayrollDatabase;
 import transaction.PaymentClassification;
 import transaction.PaymentSchedule;
+import db.PayrollDatabase.GlobalInstance;
 
 
-public class AddEmployeeTransaction implements Transaction {
+public abstract class AddEmployeeTransaction implements Transaction {
 
 	private int empId;
 	private String itsAddress;
@@ -22,8 +25,19 @@ public class AddEmployeeTransaction implements Transaction {
 	}
 	
 	public void execute() {
-//		Classification classification = GetClassification();
-//		Schedule schedule = GetSchedule();		
+		PaymentClassification classification = getClassification();
+		PaymentSchedule schedule = getSchedule();
+		PaymentMethod method = new HoldMethod();
+		Affiliation af = new NoAffiliation();
+		Employee e = new Employee(empId, itsName, itsAddress);
+		e.setClassification(classification);
+		e.setSchedule(schedule);
+		e.setMethod(method);
+		e.setAffiliation(af);
+		GlobalInstance.GpayrollDatabase.addEmployee(empId, e);		
 	}
+
+	protected abstract PaymentClassification getClassification();
+	protected abstract PaymentSchedule getSchedule();
 
 }
