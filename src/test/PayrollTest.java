@@ -208,6 +208,11 @@ public class PayrollTest {
 		t.execute();
 		
 		Date payDate = new Date(2001, 11, 29);
+		PaydayTransaction pt = new PaydayTransaction(payDate);
+		pt.execute();
+		
+		Paycheck pc = pt.getPaycheck(empId);
+		assertNull(pc);
 	}
 
 }
