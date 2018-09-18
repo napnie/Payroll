@@ -2,6 +2,9 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
+
+import org.junit.After;
 //import org.junit.Before;
 import org.junit.Test;
 
@@ -30,6 +33,11 @@ import transaction.TimeCardTransaction;
 public class PayrollTest {
 	
 	Employee e;
+	
+	@After
+	public void after() {
+		e = null;
+	}
 	
 	@Test
 	public void testAddSalariedEmployee() {
@@ -146,6 +154,60 @@ public class PayrollTest {
 		
 		PaymentSchedule ps = e.getSchedule();
 		equals(ps instanceof WeeklySchedule);
+	}
+	
+	@Test
+	public void testChangeMemberTransaction() {
+		int empId = 2;
+		int memberId = 7734;
+		AddHourlyEmployee t = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
+		t.execute();
+		
+		ChangeMemberTransaction cmt = new ChangeMemberTransaction(empId, memberId, 99.42);
+		cmt.execute();
+		getEmp(empId);
+		assertNotNull(e);
+		
+		Affiliation af = e.getAffiliation();
+		assertNotNull(af);
+		
+		equals(af instanceof UnionAffiliation);
+		UnionAffiliation uf = (UnionAffiliation) af;
+		assertEquals(99.42, uf.getDues(), .001);
+		
+		Employee member = PayrollDatabase.getUnionMember(memberId);
+		assertNotNull(member);
+		assertEquals(e, member);
+	}
+	
+	@Test
+	public void testPaySingleSalariedEmployee() {
+		int empId = 1;
+		AddSalariedEmployee t = new AddSalariedEmployee(empId, "Bob", "Home", 1000.00);
+		t.execute();
+		
+		@SuppressWarnings("deprecation")
+		Date payDate = new Date() ;
+		
+		PaydayTransaction pt = new PaydayTransaction(payDate);
+		pt.execute();
+		
+		Paycheck pc = pt.getPaycheck(empId);
+		assertNotNull(pc);
+		assertEquals(pc.getPayDate(), payDate);
+		assertEquals(1000.00, pc.getGrossPay(), .001);
+		assertEquals("Hold", pc.getField("Disposition"));
+		assertEquals(0.0, pc.getDeductions(), .001);
+		assertEquals(1000.00, pc.getNetPay(), .001);
+	}
+	
+	@Test
+	public void testPaySingleSalariedEmployeeOnWrongDate() {
+		int empId = 1;
+		AddSalariedEmployee t = new AddSalariedEmployee(empId, "Bob", "Home", 1000.00);
+		t.execute();
+		
+		Date payDate = new Date(2001, 11, 29);
 	}
 
 }
