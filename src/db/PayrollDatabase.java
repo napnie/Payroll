@@ -1,17 +1,24 @@
 package db;
+
 import java.util.List;
-import model.Employee;
+
+import domain.Employee;
 
 public interface PayrollDatabase {
-		
-	public static class GlobalInstance {
+
+	class GlobalInstance {
 		public static PayrollDatabase GpayrollDatabase;
 	}
 	
-	public Employee getEmployee(int empid);
-	public void addEmployee(int empid, Employee employee);
-	public void deleteEmployee(int empid);
-	List<Integer> getAllEmployeeIds();
 	void clear();
+
+	void addEmployee(int employeeId, Employee employee);
+	void deleteEmployee(int employeeId);
+	Employee getEmployee(int employeeId);
+	List<Integer> getAllEmployeeIds();
+
+	void addUnionMember(int memberId, Employee employee);
+	void deleteUnionMember(int memberId);
+	Employee getUnionMember(int memberId);
 
 }
