@@ -43,6 +43,7 @@ public class HourlyClassification extends PaymentClassification {
 		return totalPay.setScale(2);
 	}
 
+	@SuppressWarnings("deprecation")
 	private BigDecimal calculatePayForTimeCard(TimeCard tc) {
 		BigDecimal hours = tc.getHours();
 		BigDecimal overtime = hours.subtract(BigDecimal.valueOf(8)).max(BigDecimal.ZERO);

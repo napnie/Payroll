@@ -3,7 +3,6 @@ package domain;
 import java.math.BigDecimal;
 import java.util.Date;
 
-
 public class Employee {
 
 	private final int employeeId;

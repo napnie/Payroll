@@ -42,8 +42,10 @@ public class CommissionedClassification extends PaymentClassification {
 
 	@Override
 	public BigDecimal calculatePay(Paycheck pc) {
+		@SuppressWarnings("deprecation")
 		BigDecimal basePay = salary.multiply(MONTHS_PER_YEAR).divide(PAYCHECKS_PER_YEAR, ROUND_HALF_UP);
 		BigDecimal sales = calculateSales(pc);
+		@SuppressWarnings("deprecation")
 		BigDecimal commissionPay = commissionRate.movePointLeft(2).multiply(sales).setScale(2, ROUND_HALF_UP);
 		return basePay.add(commissionPay);
 	}

@@ -47,6 +47,7 @@ public class UnionAffiliation implements Affiliation {
 		return calculateUnionDues(pc).add(calculateServiceCharges(pc));
 	}
 
+	@SuppressWarnings("deprecation")
 	private BigDecimal calculateUnionDues(Paycheck pc) {
 		int fridays = numberOfFridaysInPayPeriod(pc.getPayPeriodStartDate(), pc.getPayPeriodEndDate());
 		return weeklyDues.multiply(BigDecimal.valueOf(fridays)).setScale(2, ROUND_HALF_UP);
