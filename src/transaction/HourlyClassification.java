@@ -1,5 +1,13 @@
 package transaction;
 
-public class HourlyClassification implements PaymentClassification {
+import java.math.BigDecimal;
+
+public class HourlyClassification extends PaymentClassification {
+
+	@Override
+	public BigDecimal calculatePay(Paycheck pc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

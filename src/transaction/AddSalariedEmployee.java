@@ -1,11 +1,14 @@
 package transaction;
 
+import java.math.BigDecimal;
+
+
 public class AddSalariedEmployee extends AddEmployeeTransaction {
 	
-	private double salary;
+	private final BigDecimal salary;
 	
-	public AddSalariedEmployee(int empId, String name, String adress, double saraly) {
-		super(empId, name, adress);
+	public AddSalariedEmployee(int empId, String name, String address, BigDecimal salary) {
+		super(empId, name, address);
 		this.salary = salary;
 	}
 	
@@ -14,9 +17,14 @@ public class AddSalariedEmployee extends AddEmployeeTransaction {
         return new SalariedClassification();
     }
 
-    @Override
-    protected PaymentSchedule getSchedule() {
-        return new MonthlySchedule();
-    }
-	
+	@Override
+	protected PaymentClassification getClassification() {
+		return new SalariedClassification(salary);
+
+	}
+
+	@Override
+	protected PaymentSchedule getSchedule() {
+		return new MonthlySchedule();
+	}
 }

@@ -1,24 +1,25 @@
 package transaction;
 
+import java.math.BigDecimal;
+
 public class AddCommissionedEmployee extends AddEmployeeTransaction {
 	
-	private double salary;
-	private double commissionRate;
+	private BigDecimal salary;
+	private BigDecimal commissionRate;
 	
-	public AddCommissionedEmployee(int empId, String name, String adress, double saraly, double commissionRate) {
-		super(empId, name, adress);
+	public AddCommissionedEmployee(int empid, String name, String address, BigDecimal salary, BigDecimal commission) {
+		super(empid, name, address);
 		this.salary = salary;
 		this.commissionRate = commissionRate;
 	}
 	
 	@Override
-    protected PaymentClassification getClassification() {
-        return new CommissionClassification();
-    }
+	protected PaymentClassification getClassification() {
+		return new CommissionedClassification(salary, commissionRate);
+	}
 
-    @Override
-    protected PaymentSchedule getSchedule() {
-        return new CommissionSchedule();
-    }
-	
+	@Override
+	protected PaymentSchedule getSchedule() {
+		return new BiweeklySchedule();
+	}
 }

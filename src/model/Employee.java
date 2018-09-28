@@ -1,8 +1,7 @@
 package model;
 
-import impl.PaymentClassification;
-import impl.PaymentMethod;
-import impl.PaymentSchedule;
+import transaction.*;
+import transaction.PaymentClassification;
 
 public class Employee {
 	
@@ -13,49 +12,73 @@ public class Employee {
 	private PaymentSchedule schedule;
 	private PaymentClassification classification;
 	private PaymentMethod method;
+	private Affiliation affiliation;
+	private final int empid;
+	private String name;
+	private String address;
 	
-	public Employee(int id, String name, String address) {
-		this.id = id;
+	
+	public Employee(int empid, String name, String address) {
+		this.empid = empid;
 		this.name = name;
 		this.address = address;
+	}
+	
+	
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	public String getAddress() {
+		return this.address;
+	}
+	
+	public int getId() {
+		return this.empid;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return this.name;
 	}
 	
 	public void setSchedule(PaymentSchedule schedule) {
 		this.schedule = schedule;
 	}
 
+	public PaymentSchedule getSchedule() {
+		return this.schedule;
+	}
+	
 	public void setClassification(PaymentClassification classification) {
 		this.classification = classification;
 	}
-	
-	public int getId() {
-		return this.id;
-	}
-
-	public Object getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public double getSalary() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public PaymentSchedule getSchedule() {
-		return schedule;
-	}
 
 	public PaymentClassification getClassification() {
-		return classification;
+		return this.classification;
+	}
+	
+	public void setAffiliation(Affiliation affiliation) {
+		this.affiliation = affiliation;
+	}
+	
+	public Affiliation getAffiliation() {
+		return this.affiliation;
+	}
+	
+	public void setMethod(PaymentMethod method) {
+		this.method = method;
 	}
 
 	public PaymentMethod getMethod() {
-		return method;
+		return this.method;
 	}
 
-	public void setMethod(PaymentMethod pm) {
-		// TODO Auto-generated method stub
-		
+
+	public double getSalary() {
+		return 0 ;
 	}
 }

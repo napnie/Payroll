@@ -1,22 +1,24 @@
 package transaction;
 
-public class AddHourlyEmployee extends AddEmployeeTransaction {
+import java.math.BigDecimal;
 
-	private double hourlyRate;
+public class AddHourlyEmployee extends AddEmployeeTransaction {
 	
-	public AddHourlyEmployee(int empId, String name, String adress, double hourlyRate) {
-		super(empId, name, adress);
+	private final BigDecimal hourlyRate;
+
+	public AddHourlyEmployee(int employeeId, String name, String address, BigDecimal hourlyRate) {
+		super(employeeId, name, address);
 		this.hourlyRate = hourlyRate;
 	}
-	
-	@Override
-    protected PaymentClassification getClassification() {
-        return new HourlyClassification();
-    }
 
-    @Override
-    protected PaymentSchedule getSchedule() {
-        return new HourlySchedule();
-    }
-	
+	@Override
+	protected PaymentClassification getClassification() {
+		//return new HourlyClassification(hourlyRate);
+		return null;
+	}
+
+	@Override
+	protected PaymentSchedule getSchedule() {
+		return new WeeklySchedule();
+	}
 }
