@@ -33,4 +33,6 @@ public interface TransactionFactory {
 
 	Transaction makeTimeCardTransaction(Date date, BigDecimal hours, int employeeId);
 
+	Transaction makeNullTransaction();
+	
 }

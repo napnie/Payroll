@@ -1,0 +1,12 @@
+emp 2 "Bill" "Work" c 2500.00 3.2
+emp 3 "Lance" "Home" h 15.25
+emp 4 "Jack" "Work" s 2500.00
+emp 5 "Light" "Work" s 2500.00
+del 5
+emp 6 "Shadow" "Work" s 2500.00
+change 2 c 3000 6.6
+change 3 h 20.50
+change 6 m 1 13.3
+change 6 n "Dark"
+change 4 s 4000.00
+change 6 u

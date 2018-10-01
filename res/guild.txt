@@ -1,0 +1,12 @@
+emp > add employee > 3
+    c = commission
+    h = hourly
+    s = salary
+change > change > 6
+    c = commission
+    h = hourly
+    m = member
+    n = name
+    s = salary
+    u = unaffiliated
+del > delete > 1

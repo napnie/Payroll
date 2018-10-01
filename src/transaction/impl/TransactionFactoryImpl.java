@@ -78,4 +78,8 @@ public class TransactionFactoryImpl implements TransactionFactory {
 		return new TimeCardTransaction(date, hours, employeeId);
 	}
 
+	@Override
+	public Transaction makeNullTransaction() {
+		return new NullTransaction();
+	}
 }
