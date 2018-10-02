@@ -48,7 +48,13 @@ import transaction.impl.PaydayTransaction;
 import transaction.impl.SalesReceiptTransaction;
 import transaction.impl.ServiceChargeTransaction;
 import transaction.impl.TimeCardTransaction;
-
+/**
+ * Test cases of the payroll case study.
+ * 
+ * @author Theeruth Borisuth
+ * @author Nitith   Chayakul
+ */
+ 
 public class PayrollTest {
 
 	@Before

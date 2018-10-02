@@ -2,7 +2,12 @@ package domain;
 
 import java.math.BigDecimal;
 import java.util.Date;
-
+/**
+ * This class will create an employee payment information. (Id, Name, Address, Schedule etc.)
+ * 
+ * @author Theeruth Borisuth
+ * @author Nitith   Chayakul
+ */
 public class Employee {
 
 	private final int employeeId;

@@ -10,19 +10,27 @@ import domain.PaymentSchedule;
 import impl.HoldMethod;
 import impl.NoAffiliation;
 import transaction.Transaction;
-
+/**
+ * This abstract class is used for add theemployee transacton.
+ * 
+ * @author Theeruth Borisuth
+ * @author Nitith   Chayakul
+ *
+ */
 public abstract class AddEmployeeTransaction implements Transaction {
-
+	//variables
 	private final int employeeId;
 	private final String name;
 	private final String address;
-
+	
+	//Constructor.
 	public AddEmployeeTransaction(int employeeId, String name, String address) {
 		this.employeeId = employeeId;
 		this.name = name;
 		this.address = address;
 	}
-
+	
+	//Execute the program
 	@Override
 	public final void execute() {
 		PaymentClassification pc = getClassification();
@@ -37,8 +45,9 @@ public abstract class AddEmployeeTransaction implements Transaction {
 		GpayrollDatabase.addEmployee(employeeId, e);
 	}
 
-
+	//Get the classification.
 	protected abstract PaymentClassification getClassification();
+	//Get the payment schedule.
 	protected abstract PaymentSchedule getSchedule();
 	
 }

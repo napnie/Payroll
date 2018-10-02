@@ -7,13 +7,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+/**
+ * This class will handle the insertion of the transaction.
+ * 
+ * @author Theeruth Borisuth
+ * @author Nitith   Chayakul
+ */
 
 public class TextParserTransactionSource implements TransactionSource {
-
+	
+	//variables
 	private final String transactionsFile = "./res/transactions.txt";
 	private final TransactionFactory factory;
 	private BufferedReader reader;
-
+	
+	//constructor
 	public TextParserTransactionSource(TransactionFactory factory) {
 		this.factory = factory;
 		
@@ -28,6 +36,9 @@ public class TextParserTransactionSource implements TransactionSource {
 		reader = new BufferedReader(new InputStreamReader(input));
 	}
 	
+	/**
+	 * get the transaction.
+	 */
 	@Override
 	public Transaction getTransaction() {
 		try {
@@ -38,7 +49,15 @@ public class TextParserTransactionSource implements TransactionSource {
 			throw new RuntimeException("unable to read transaction", e);
 		}
 	}
-
+	
+	/**
+	 * get the line of the transaction.
+	 * @param line
+	 * @return if parts[0] == "emp": add the employee transaction.
+	 * 			  parts[0] == "change": change the transaction.
+	 * 			  parts[0] == "del" : delete the transaction.
+	 * 	else make the transaction null.
+	 */			
 	private Transaction parseLine(String line) {
 		
 		String[] parts = line.split(" ");
@@ -52,7 +71,18 @@ public class TextParserTransactionSource implements TransactionSource {
 		}
 		return factory.makeNullTransaction();
 	}
-
+	
+	/**
+	 * Make the change transactions.
+	 * @param parts
+	 * @return if parts[2] == "c": make change to the commissioned transaction.
+	 * 			  parts[2] == "h": make change to the hourly transaction.
+	 * 			  parts[2] == "m": make change to the member transaction.
+	 * 			  parts[2] == "n": make change to the name transaction.
+	 * 			  parts[2] == "s": make change to the salaried transaction.
+	 * 			  parts[2] == "u": make change to the unaffiliated transaction.
+	 * 	else make the transaction null.
+	 */
 	private Transaction makeChangeTrans(String[] parts) {
 		if( parts[2].equals("c") ) {
 			return factory.makeChangeCommissionedTransaction( integer(parts[1])
@@ -76,7 +106,14 @@ public class TextParserTransactionSource implements TransactionSource {
 		}
 		return factory.makeNullTransaction();
 	}
-
+	
+	/**
+	 * Make the employee transaction.
+	 * @param parts
+	 * @return if parts[4] == "h": add hourly transaction in part 1, 2, 3 and decimals in part 5 of the transaction that convert into array of strings.
+	 * 			  parts[4] == "c": add commissioned transaction in part 1, 2, 3 and decimals in part 5  of the transaction that convert into array of strings.
+	 * 			  parts[4] == "s": add salaried transaction in part 1, 2, 3 and decimals in part 5  of the transaction that convert into array of strings.
+	 */
 	private Transaction makeAddEmployeeTrans(String[] parts) {
 		if (parts[4].equals("h")) {
 			return factory.makeAddHourlyTransaction(integer(parts[1]), string(parts[2]), string(parts[3]), decimal(parts[5]));
@@ -90,15 +127,30 @@ public class TextParserTransactionSource implements TransactionSource {
 		}
 		return factory.makeNullTransaction();
 	}
-
+	
+	/**
+	 * cut the front and back of the string
+	 * @param value
+	 * @return return the string values.
+	 */
 	private String string(String value) {
 		return value.substring(1, value.length() - 1);
 	}
 	
+	/**
+	 * return Integer value
+	 * @param value
+	 * @return return the integer values.
+	 */
 	private Integer integer(String value) {
 		return Integer.valueOf(value);
 	}
 	
+	/**
+	 * return BigDecimal value
+	 * @param value
+	 * @return return the decimal values.
+	 */
 	private BigDecimal decimal(String value) {
 		return new BigDecimal(value);
 	}

@@ -10,17 +10,24 @@ import java.util.Map;
 import domain.Employee;
 import domain.Paycheck;
 import transaction.Transaction;
-
+/**
+ * This class will handle the transaction of the pay day.
+ * @author Theeruth Borisuth
+ * @author Nitith   Chayakul
+ */
 public class PaydayTransaction implements Transaction {
-
+	//variables
 	private final Map<Integer, Paycheck> paychecks = new HashMap<Integer, Paycheck>();
 	private final Date payDate;
 	
-
+	//constructors.
 	public PaydayTransaction(Date payDate) {
 		this.payDate = payDate;
 	}
-
+	
+	/**
+	 * Executing the transaction.
+	 */
 	@Override
 	public void execute() {
 		List<Integer> empIds = GpayrollDatabase.getAllEmployeeIds();
@@ -33,7 +40,12 @@ public class PaydayTransaction implements Transaction {
 			}
 		}
 	}
-
+	
+	/**'
+	 * Get the paycheck
+	 * @param employeeId
+	 * @return paycheck of that employee.
+	 */
 	public Paycheck getPaycheck(int employeeId) {
 		return paychecks.get(employeeId);
 	}

@@ -10,19 +10,29 @@ import domain.PaymentClassification;
 import impl.HourlyClassification;
 import impl.TimeCard;
 import transaction.Transaction;
-
+/**
+ * 
+ * This class will do the transaction of the time card.
+ * @author Theeruth Borisuth
+ * @author Nitith   Chayakul
+ */
 public class TimeCardTransaction implements Transaction {
-
+	
+	//variables
 	private final Date date;
 	private final BigDecimal hours;
 	private final int employeeId;
-
+	
+	//constructors
 	public TimeCardTransaction(Date date, BigDecimal hours, int employeeId) {
 		this.date = date;
 		this.hours = hours;
 		this.employeeId = employeeId;
 	}
-
+	
+	/**
+	 * Execute the transaction.
+	 */
 	@Override
 	public void execute() {
 		Employee e = GpayrollDatabase.getEmployee(employeeId);
